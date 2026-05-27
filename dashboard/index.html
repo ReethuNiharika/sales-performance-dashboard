@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sales Performance Analytics Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background:#f7f7f9; color:#222; }
+    .header { background:#101828; color:white; padding:24px 32px; }
+    .grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; padding:24px 32px; }
+    .card { background:white; border-radius:14px; padding:18px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+    .kpi { font-size:28px; font-weight:700; margin-top:8px; }
+    .charts { display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; padding:0 32px 32px; }
+    .chart { background:white; border-radius:14px; padding:12px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+    .insights { background:white; margin:0 32px 32px; border-radius:14px; padding:20px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Sales Performance Analytics Dashboard</h1>
+    <p>End-to-end data analyst project using Python, SQL, and dashboard storytelling.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><div>Total Revenue</div><div class="kpi">$1,295,804</div></div>
+    <div class="card"><div>Total Profit</div><div class="kpi">$473,080</div></div>
+    <div class="card"><div>Total Orders</div><div class="kpi">1,800</div></div>
+    <div class="card"><div>Profit Margin</div><div class="kpi">36.5%</div></div>
+  </div>
+  <div class="charts">
+    <div class="chart"><div id="monthly"></div></div>
+    <div class="chart"><div id="region"></div></div>
+    <div class="chart"><div id="category"></div></div>
+    <div class="chart"><div id="products"></div></div>
+  </div>
+  <div class="insights">
+    <h2>Business Insights</h2>
+    <ul>
+      <li>Technology and Office Supplies are strong revenue drivers; monitor discounting to protect margin.</li>
+      <li>Regional performance varies, so leadership should prioritize campaigns in lower-profit regions.</li>
+      <li>Monthly trend analysis helps identify seasonal demand and supports better sales planning.</li>
+      <li>This dashboard gives leaders a quick view of revenue, profit, orders, margin, and product performance.</li>
+    </ul>
+  </div>
+<script>
+const monthly = [{"order_date": "2025-01-01", "revenue": 107181.36, "profit": 39365.4, "orders": 157}, {"order_date": "2025-02-01", "revenue": 109145.28, "profit": 39471.14, "orders": 150}, {"order_date": "2025-03-01", "revenue": 106195.73, "profit": 37498.97, "orders": 124}, {"order_date": "2025-04-01", "revenue": 114253.96, "profit": 40979.82, "orders": 153}, {"order_date": "2025-05-01", "revenue": 122724.14, "profit": 44449.74, "orders": 152}, {"order_date": "2025-06-01", "revenue": 112609.6, "profit": 41170.27, "orders": 162}, {"order_date": "2025-07-01", "revenue": 93479.72, "profit": 35069.19, "orders": 130}, {"order_date": "2025-08-01", "revenue": 114777.93000000001, "profit": 42888.67, "orders": 176}, {"order_date": "2025-09-01", "revenue": 103058.44, "profit": 37823.19, "orders": 143}, {"order_date": "2025-10-01", "revenue": 101978.44, "profit": 38023.91, "orders": 153}, {"order_date": "2025-11-01", "revenue": 105974.61, "profit": 38611.6, "orders": 145}, {"order_date": "2025-12-01", "revenue": 104424.86, "profit": 37728.04, "orders": 155}];
+const region = [{"region": "Midwest", "revenue": 285759.67, "profit": 104326.35}, {"region": "Northeast", "revenue": 349147.94, "profit": 128471.08}, {"region": "South", "revenue": 365359.78, "profit": 133830.17}, {"region": "West", "revenue": 295536.68, "profit": 106452.34}];
+const category = [{"category": "Furniture", "revenue": 436466.62, "profit": 136612.36}, {"category": "Office Supplies", "revenue": 106444.07, "profit": 48690.21}, {"category": "Technology", "revenue": 752893.38, "profit": 287777.37}];
+const products = [{"product": "Keyboard", "profit": 63160.26, "revenue": 160744.12}, {"product": "Laptop", "profit": 59915.4, "revenue": 160432.25}, {"product": "Monitor", "profit": 56493.58, "revenue": 146166.14}, {"product": "Printer", "profit": 54932.7, "revenue": 145190.05}, {"product": "Headset", "profit": 53275.43, "revenue": 140360.82}, {"product": "Chair", "profit": 29756.97, "revenue": 90939.45}, {"product": "Table", "profit": 29195.79, "revenue": 91169.29}, {"product": "Desk", "profit": 27410.4, "revenue": 90175.48}, {"product": "Cabinet", "profit": 25655.38, "revenue": 82463.91}, {"product": "Bookcase", "profit": 24593.82, "revenue": 81718.49}];
+
+Plotly.newPlot('monthly', [
+  {x: monthly.map(d=>d.order_date), y: monthly.map(d=>d.revenue), type:'scatter', mode:'lines+markers', name:'Revenue'},
+  {x: monthly.map(d=>d.order_date), y: monthly.map(d=>d.profit), type:'scatter', mode:'lines+markers', name:'Profit'}
+], {title:'Monthly Revenue & Profit Trend', margin:{t:50}});
+
+Plotly.newPlot('region', [
+  {x: region.map(d=>d.region), y: region.map(d=>d.revenue), type:'bar', name:'Revenue'}
+], {title:'Revenue by Region', margin:{t:50}});
+
+Plotly.newPlot('category', [
+  {labels: category.map(d=>d.category), values: category.map(d=>d.revenue), type:'pie'}
+], {title:'Revenue by Category', margin:{t:50}});
+
+Plotly.newPlot('products', [
+  {x: products.map(d=>d.profit), y: products.map(d=>d.product), type:'bar', orientation:'h'}
+], {title:'Top Products by Profit', margin:{t:50, l:90}});
+</script>
+</body>
+</html>
