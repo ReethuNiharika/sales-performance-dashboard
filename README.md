@@ -31,6 +31,12 @@ README.md
 2. Run `src/analysis.py` to see Python KPI analysis.
 3. Use `sql/sales_analysis.sql` to recreate the analysis in a database.
 
+##Tools Used
+-SQL
+-Python
+-Data Visualization (HTML Dashboard)
+-CSV Dataset
+
 ## Key Insights
 - Total Revenue: $1,295,804.07
 - Total Profit: $473,079.94
@@ -41,4 +47,4 @@ README.md
 The dashboard starts with high-level KPIs, then moves into monthly revenue/profit trends, regional performance, category contribution, and top products by profit. This structure helps business leaders quickly understand performance and identify improvement areas.
 
 ## Repository Link
-Add your GitHub repository link here after uploading the project.
+https://github.com/ReethuNiharika/sales-performance-dashboard
